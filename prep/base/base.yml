@@ -1,0 +1,33 @@
+sources:
+
+  - name: wellthy
+    database: source_database
+    schema: source_schema
+    description: This is data from the Wellthy production database, extracted via Fivetran.
+    freshness: # default freshness
+      warn_after: {count: 1, period: hour}
+    loaded_at_field: _fivetran_synced
+    tables:
+      - name: members
+        description: A table of a all Wellthy platform accounts of type member.
+        columns:
+          - name: id
+            description: Primary Key of the activity project table.
+            tests:
+              - not_null
+              - unique
+          - name: type
+            description: The type of a project.
+          - name: status
+            description: The status of a project.
+          - name: first_active
+            description: The timestamp when a project first became active.
+          - name: created
+            description: The timestamp when a project was created.
+          - name: modified
+            description: The timestamp of the latest modification to a project.
+          - name: creator_id
+            description : The ID of a project's creator.
+            tests:
+              - not_null:
+                  severity: warn
