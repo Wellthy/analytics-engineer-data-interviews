@@ -80,3 +80,7 @@ models:
     description:
   - name: synced_at
     description: A timestamp for when the records was synced via Fivetran.
+
+  - name: events
+    description: A table of all Snowplow events.
+    columns:

@@ -1,0 +1,61 @@
+{
+    "description": "Schema for a funnel event",
+    "properties": {
+      "funnel_name": {
+        "type": "string",
+        "description": "The name of the funnel",
+        "enum": [
+          "MEMBER_INTAKE"
+        ]
+      },
+      "step_name": {
+        "type": "string",
+        "description": "The name of the step in the funnel.",
+        "enum": [
+          "SET_UP_MFA",
+          "INPUT_FULL_NAME",
+          "CREATE_CARE_RECIPIENT",
+          "VERIFY_ELIGIBILITY",
+          "REFERRAL_SOURCE",
+          "CREATE_ACCOUNT",
+          "CREATE_PROJECT",
+          "CREATE_PASSWORD",
+          "CONFIRM_COUNTRY",
+          "CAREGIVING_GOAL"
+        ]
+      },
+      "step_action": {
+        "type": [
+          "string"
+        ],
+        "enum": [
+          "SKIP",
+          "SUBMIT",
+          "EXPAND"
+        ],
+        "description": "The base funnel step action"
+      },
+      "failure_reason": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "maxLength": 1024,
+        "description": "The base funnel step failure reason"
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "funnel_name",
+      "step_name",
+      "step_action"
+    ],
+    "self": {
+      "vendor": "com.wellthy",
+      "name": "base_funnel",
+      "format": "jsonschema",
+      "version": "1-0-4"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }

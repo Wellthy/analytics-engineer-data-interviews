@@ -1,0 +1,41 @@
+{
+    "description": "Schema for a User entity",
+    "properties": {
+      "role": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "maxLength": 255,
+        "enum": [
+          "MEMBER",
+          "STAFF"
+        ],
+        "description": "Description of user's role in relation to the Wellthy organization."
+      },
+      "is_eligibility_verified": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Eligibility status of the Member."
+      },
+      "user_id": {
+        "type": "string",
+        "maxLength": 255,
+        "description": "App specific identifier of the User."
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "user_id"
+    ],
+    "self": {
+      "vendor": "com.wellthy",
+      "name": "User",
+      "format": "jsonschema",
+      "version": "2-0-1"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }

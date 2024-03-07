@@ -2,15 +2,13 @@ SELECT user_id AS member_id
      , user_type
      , user_name
      , created AS created_at
-     , DATE(created) AS created_date
+     , DATE(created) AS signup_date
      , modified AS most_recent_modified_at
      , DATE(modified) AS most_recent_modified_date
+     , DATEDIFF('days', created_date, CURRENT_DATE) AS days_since_signup
      , group_id AS client_group_id
      , eligibility_verified AS is_eligibility_verified
-     , CASE WHEN DATEADD(year, DATEDIFF(years, {{ birthdate }}, CURRENT_DATE()), {{birthdate}}) > CURRENT_DATE() 
-            THEN DATEDIFF(YEARS, {{ birthdate }}, CURRENT_DATE()) - 1
-            ELSE DATEDIFF(YEARS, {{ birthdate }}, CURRENT_DATE())
-        END AS member_age_in_years
+     , {{ get_age_in_years('birthdate') }} AS member_age_in_years
      , referral_source
      , country
      , CASE WHEN email = ''

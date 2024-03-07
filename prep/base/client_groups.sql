@@ -1,9 +1,8 @@
 SELECT id AS group_id
      , name AS group_name
      , client_id
-     , care_recipient_countries
-     , country
      , created AS created_at
+     , DATE(created) AS created_date
      , CASE WHEN group_status = 1
             THEN 'Implementation'
             WHEN group_status = 2
@@ -22,11 +21,8 @@ SELECT id AS group_id
             THEN NULL
             ELSE 'Undefined'
         END AS group_status
-     , is_default
+     , is_default AS is_default_group
      , modified AS modified_at
-     , offers_community_access
-     , covered_lives AS number_of_covered_lives
-     , DATE(covered_lives_effective_date) AS covered_lives_effective_date
      , _fivetran_synced AS synced_at
   FROM {{ source('wellthy', 'partnerships_group') }}
  WHERE _fivetran_deleted = FALSE
