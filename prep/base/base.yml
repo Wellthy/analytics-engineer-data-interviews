@@ -1,150 +1,82 @@
-sources:
-
-  - name: wellthy
-    database: source_database
-    schema: source_schema
-    description: This is data from the Wellthy production database, extracted via Fivetran.
-    freshness: # default freshness
-      warn_after: {count: 1, period: hour}
-    loaded_at_field: _fivetran_synced
-    tables:
-      - name: members
-        description: A table of all Wellthy platform accounts of type member.
-        columns:
-          - name: user_id
-            description: Primary key for Wellthy platform profiles.
-            tests:
-              - not_null
-      - name: created
-        description: The timestamp for when a user profile was created.
-      - name: modified
-        description: The timestamp for when a user profile was most recently modified.
-      - name: caregiving_goal
-        description: The answer an onboarding member gives when prompted with "What is your caregiving goal?"
-        tests:
-          - accepted_values:
-              values: ['Care Plan'
-                      ,'Community'
-                      ,'Care Project'
-                      ,'Looking Around'
-                      ,'Omitted: Question Disabled'
-                      ,'Omitted: Project Access Only'
-                      ,'Omitted: Webinar Signup'
-                      ]
-      - name: country
-        description: '{{ doc("country") }}'
-      - name: created_at
-        description: '{{ doc("created_at") }}'
-      - name: created_date
-        description: '{{ doc("created_date") }}'
-      - name: created_week
-        description: '{{ doc("created_week") }}'
-      - name: first_assigned_project_coordinator_at
-        description: '{{ doc("first_assigned_project_coordinator_at") }}'
-      - name: first_assigned_project_coordinator_date
-        description: '{{ doc("first_assigned_project_coordinator_date") }}'
-      - name: gender
-        description: '{{ doc("gender") }}'
-      - name: gets_newsletter
-        description: '{{ doc("gets_newsletter") }}'
-        tests:
-          - accepted_values:
-              values: [true,false]
-              quote: false
-          - not_null:
-              config:
-                where: 'profile_deleted_at is null'
-      - name: group_id
-        description: '{{ doc("group_id") }}'
-        tests:
-          - relationships:
-              to: ref('client_groups')
-              field: group_id
-      - name: has_enabled_email_notifications
-        tests:
-          - accepted_values:
-              values: [true,false]
-              quote: false
-          - not_null:
-              config:
-                where: 'profile_deleted_at is null'
-      - name: is_deleted_member
-        description: '{{ doc("is_deleted_member") }}'
-      - name: is_eligibility_verified
-        description: '{{ doc("is_eligibility_verified") }}'
-      - name: is_proxy_account
-        description: '{{ doc("is_proxy_account") }}'
-        tests:
-          - accepted_values:
-              values: [true,false]
-              quote: false
-      - name: language_id
-        description: '{{ doc("language_id") }}'
-        tests:
-          - relationships:
-              to: ref('languages')
-              field: language_id
-      - name: member_age_in_years
-        description: 
-      - name: member_has_consented_to_tax_benefit
-        description: '{{ doc("member_has_consented_to_tax_benefit") }}'
-        tests:
-          - accepted_values:
-              values: [true,false]
-              quote: false
+models:
+  - name: members
+    description: A table of all Wellthy platform accounts of type member.
+    columns:
       - name: member_id
-        description: '{{ doc("member_id") }}'
+        description: Primary key for Wellthy platform profiles.
         tests:
           - not_null
-          - unique
-          - relationships:
-              to: ref('user_profiles')
-              field: profile_id
-              config:
-                where: 'profile_deleted_at is null'
-      - name: most_recent_modified_at
-        description: '{{ doc("modified_at") }}'
-      - name: most_recent_modified_date
-        description: '{{ doc("modified_date") }}'
-      - name: most_recent_surveyed_date
-        description: '{{ doc("last_surveyed_at") }}'
-      - name: notifications_include_project_data
-        description: '{{ doc("notifications_include_project_data") }}'
-        tests:
-          - accepted_values:
-              values: [true,false]
-              quote: false
-          - not_null:
-              config:
-                where: 'profile_deleted_at is null'
-      - name: preferred_contact_method
-        description: '{{ doc("preferred_contact_method") }}'
-        tests:
-          - accepted_values:
-              values: ['Email','Phone','Secondary Email']
-              where: 'profile_deleted_at is null'
-          - not_null:
-              config:
-                where: 'profile_deleted_at is null'
-      - name: profile_deleted_at
-        description: '{{ doc("deleted_at") }}'
-      - name: profile_deleted_date
-        description: '{{ doc("deleted_date") }}'
-      - name: referral_source_id
-        description: '{{ doc("referral_source_id") }}'
-        tests:
-          - relationships:
-              to: ref('referral_sources')
-              field: referral_source_id
-      - name: secondary_email
-        description: '{{ doc("secondary_email") }}'
-      - name: secondary_email_domain
-        description: '{{ doc("secondary_email_domain") }}'
-        tests:
-          - not_null:
-              config:
-                where: 'secondary_email is not null'
-      - name: user_type
-        description: '{{ doc("user_type") }}'
-      - name: synced_at
-        description: '{{ doc("_fivetran_synced") }}'
+  - name: created_at
+    description: The timestamp for when a member profile was created.
+  - name: modified_at
+    description: The timestamp for when a member profile was most recently modified.
+  - name: caregiving_goal
+    description: The answer an onboarding member gives when prompted with "What is your caregiving goal?"
+    tests:
+      - accepted_values:
+          values: ['Create a Care Plan'
+                  ,'Create a Community Account'
+                  ,'Create a Care Project'
+                  ,'I'm Just Looking Around'
+                  ,'Omitted: Question Disabled'
+                  ,'Omitted: Project Access Only'
+                  ,'Omitted: Webinar Signup'
+                  ]
+  - name: country
+    description: The country the member resides in.
+  - name: created_date
+    description: '{{ doc("created_date") }}'
+  - name: created_week
+    description: '{{ doc("created_week") }}'
+  - name: gender
+    description: '{{ doc("gender") }}'
+  - name: group_id
+    description: '{{ doc("group_id") }}'
+    tests:
+      - relationships:
+          to: ref('client_groups')
+          field: group_id
+  - name: is_deleted_member
+    description: '{{ doc("is_deleted_member") }}'
+  - name: is_eligibility_verified
+    description: '{{ doc("is_eligibility_verified") }}'
+  - name: is_proxy_account
+    description: '{{ doc("is_proxy_account") }}'
+    tests:
+      - accepted_values:
+          values: [true,false]
+          quote: false
+  - name: member_age_in_years
+    description: The members age in years, derived from their provided birthdate.
+  - name: member_id
+    description: Unique identifier for a Wellthy member account.
+    tests:
+      - not_null
+      - unique
+  - name: most_recent_modified_at
+    description: '{{ doc("modified_at") }}'
+  - name: most_recent_modified_date
+    description: '{{ doc("modified_date") }}'
+  - name: preferred_contact_method
+    description: '{{ doc("preferred_contact_method") }}'
+    tests:
+      - accepted_values:
+          values: ['Email','Phone','Secondary Email']
+          where: 'profile_deleted_at is null'
+      - not_null:
+          config:
+            where: 'profile_deleted_at is null'
+  - name: profile_deleted_at
+    description: '{{ doc("deleted_at") }}'
+  - name: profile_deleted_date
+    description: '{{ doc("deleted_date") }}'
+  - name: referral_source
+    description: How did the member first hear about Wellthy?
+  - name: member_email
+    description: The email address entered upon creating a Wellthy account.
+  - name: member_email_domain
+    description: The domain of the email entered upon creating a Wellthy account. 
+  - name: user_type
+    description:
+  - name: synced_at
+    description: A timestamp for when the records was synced via Fivetran.

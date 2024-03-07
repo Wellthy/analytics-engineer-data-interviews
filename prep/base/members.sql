@@ -7,12 +7,11 @@ SELECT user_id AS member_id
      , DATE(modified) AS most_recent_modified_date
      , group_id AS client_group_id
      , eligibility_verified AS is_eligibility_verified
-     , CAST(last_surveyed AS DATE) AS most_recent_surveyed_date
      , CASE WHEN DATEADD(year, DATEDIFF(years, {{ birthdate }}, CURRENT_DATE()), {{birthdate}}) > CURRENT_DATE() 
             THEN DATEDIFF(YEARS, {{ birthdate }}, CURRENT_DATE()) - 1
             ELSE DATEDIFF(YEARS, {{ birthdate }}, CURRENT_DATE())
         END AS member_age_in_years
-     , referral_source_id
+     , referral_source
      , country
      , CASE WHEN email = ''
             THEN NULL
@@ -22,16 +21,14 @@ SELECT user_id AS member_id
             THEN SPLIT_PART(email,'@',2)
             ELSE NULL
         END AS member_email_domain
-     , email_notifications AS has_enabled_email_notifications
-     , newsletter AS gets_newsletter
      , CASE WHEN caregiving_goal = 1
-            THEN 'Care Plan'
+            THEN 'Create a Care Plan'
             WHEN caregiving_goal = 2
-            THEN 'Community'
+            THEN 'Create a Community Account'
             WHEN caregiving_goal = 3
-            THEN 'Care Project'
+            THEN 'Create a Care Project'
             WHEN caregiving_goal = 4
-            THEN 'Looking Around'
+            THEN 'Just Looking Around'
             WHEN caregiving_goal = 6
             THEN 'Omitted: Project Access Only'
             WHEN caregiving_goal = 7
@@ -47,6 +44,5 @@ SELECT user_id AS member_id
             THEN _fivetran_synced
             ELSE NULL
         END AS profile_deleted_at
-     , DATE(profile_deleted_at) AS profile_deleted_date
      , _fivetran_synced AS synced_at
 FROM {{ source('wellthy', 'profiles_member') }}
