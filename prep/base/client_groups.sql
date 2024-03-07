@@ -1,5 +1,5 @@
-SELECT id AS group_id
-     , name AS group_name
+SELECT id AS client_group_id
+     , name AS client_group_name
      , client_id
      , created AS created_at
      , DATE(created) AS created_date

@@ -77,7 +77,7 @@ SELECT events.app_id
      , members.is_eligibility_verified
      , members.member_age_in_years
      , members.gender_name
-     , referral_source
+     , members.referral_source
      , members.country
      , members.member_email
      , members.member_email_domain

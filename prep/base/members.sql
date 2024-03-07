@@ -1,6 +1,5 @@
 SELECT user_id AS member_id
-     , user_type
-     , user_name
+     , user_name AS member_name
      , created AS created_at
      , DATE(created) AS signup_date
      , modified AS most_recent_modified_at
@@ -10,7 +9,7 @@ SELECT user_id AS member_id
      , eligibility_verified AS is_eligibility_verified
      , {{ get_age_in_years('birthdate') }} AS member_age_in_years
      , referral_source
-     , country
+     , country AS member_country
      , CASE WHEN email = ''
             THEN NULL
             ELSE email

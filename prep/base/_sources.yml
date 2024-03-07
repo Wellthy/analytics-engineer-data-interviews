@@ -8,25 +8,11 @@
     tables:
       - name: members
         description: A table of all Wellthy platform accounts of type member.
-        columns:
-          - name: user_id
-            description: Primary key for Wellthy platform profiles.
-            tests:
-              - not_null
       - name: client_groups
         description: A table of Wellthy client groups. Client groups are segments of members underneath a client.
-        columns:
-          - name: group_id
-            description: Primary key for client groups. 
-            tests:
-              - not_null
-         - name: clients
-           description: A table of all Wellthy clients.
-           columns:
-             - name: id
-               description: Primary key amnd unique identifier for a Wellthy client.
-               tests:
-                 - not_null
+      - name: clients
+        description: A table of all Wellthy clients.
+
 
 - name: snowplow
     database: source_database
@@ -38,10 +24,4 @@
     tables:
       - name: events
         description: A table of all tracking events logged by Snowplow.
-        columns:
-          - name: event_id
-            description: Primary key for a logged event.
-            tests:
-              - not_null
-              - unique
        

@@ -1,17 +1,13 @@
 models:
-  - name: snowplow_member_events
+  - name: member_events
     description: An intermediate model combining Snowplow events with the member profile that performed the event.
     columns:
-      - name: collector_tstamp
-        description: '{{ doc("col_collector_tstamp") }}'
-        tests:
-          - not_null
-      - name: etl_tstamp
-        description: '{{ doc("col_etl_tstamp") }}'
-        tests:
-          - not_null
       - name: event_id
-        description: '{{ doc("col_event_id") }}'
+        description: Primary key for Wellthy platform profiles.
         tests:
           - not_null
           - unique
+      - name: member_id
+        description: Unique identifier for Wellthy member profiles.
+        tests:
+          - not_null

@@ -73,7 +73,6 @@ SELECT  event_id
 	  , refr_dvce_tstamp
 	  , true_tstamp
 	  , load_tstamp
-
 FROM {{ source('snowplow', 'atomic_events')}}
 {% if is_incremental() %}
  WHERE derived_tstamp >= (SELECT MAX(derived_tstamp) FROM {{ this }} )

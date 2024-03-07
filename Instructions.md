@@ -21,7 +21,7 @@ The Head of Product comes to the Data Team with the suspicion that drop-off rate
 ## Here are some of the business questions that analyst would like to be able to answer:
 * Which step in the Member Intake funnel has the largest dropoff?
     * Is this dropoff consistent across our user base, or does it affect some groups more than others?
-* What percent of new signups make it through the project funnel, from Creating Account to creating their first Care Project? 
+* What percent of new signups make it through the project funnel (i.e., convert), from Creating Account to creating their first Care Project? 
     * How has this changed over time?
 * Do conversion rates vary across our clients?
 * Which pages in the Member Intake funnel are members most likely to skip?

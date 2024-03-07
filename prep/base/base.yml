@@ -1,86 +1,118 @@
 models:
+  - name: events
+    description: A base model for initial transformations on the source events table. This model is updated incrementally.
+    columns: 
+      - name: event_id
+        description: Primary key for each logged event.
+        tests:
+          - not_null
+          - unique
+
+  - name: client_groups
+    description: A base model performing initial transformations on the source client_groups table.
+    columns:
+      - name: client_group_id
+        description: Primary key for the client_groups table. Unique to each Wellthy client group.
+        tests:
+          - not_null
+          - unique
+      - name: client_group_name
+        description: The name of the client group.
+        tests:
+          - not_null
+      - name: client_id
+        description: A foreign key linking a client group to its parent client.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('clients')
+              field: client_id
+      - name: group_status
+        description: The current status a client group in their lifecycle with Wellthy.
+        tests:
+          - accepted_values:
+              values: ['Implementation',
+                       'Pre-launch',
+                       'Pilot',
+                       'Sales Trials',
+                       'Active',
+                       'Decommisioning',
+                       'Terminated']
+      - name: is_default_group
+        description: A boolean indicating whether a group is the default group for a client.
+
+  - name: clients
+    description: A base model performing initial transformations on the source clients table.
+    columns:
+      - name: client_id
+        description: Primary key for the clients table. Unqiue to each Wellthy client.
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: The name of the client.
+      - name: contract_type
+        description: The type of contract the client has with Wellthy.
+      - name: client_manager_id
+        description: The ID of the Client Success Manager who oversees the client.
+      - name: client_launch_date
+        description: The date for when a client officially launched with Wellthy.
+      - name: days_since_launch
+        description: The number of days since the launch.
+      - name: client_size
+        description: The number of employees a client has.
+      - name: client_industry
+        description: The industry a client is a part of, e.g., Industrial, Hospitality, Technology.
+      - name: client_landing_page_url
+        description: The URL of webpage that a clients' employees will use to nagivate and log into Wellthy.
+      - name: eligibility_verification_method
+        description: The method by which a client's employees will verify their eligibility for Wellthy.
+      - name: is_archived
+        description: A boolean for clients who have discontinued use of Wellthy.
+
+
   - name: members
     description: A table of all Wellthy platform accounts of type member.
     columns:
       - name: member_id
-        description: Primary key for Wellthy platform profiles.
+        description: Unique identifier for a Wellthy member profile.
         tests:
           - not_null
-  - name: created_at
-    description: The timestamp for when a member profile was created.
-  - name: modified_at
-    description: The timestamp for when a member profile was most recently modified.
-  - name: caregiving_goal
-    description: The answer an onboarding member gives when prompted with "What is your caregiving goal?"
-    tests:
-      - accepted_values:
-          values: ['Create a Care Plan'
-                  ,'Create a Community Account'
-                  ,'Create a Care Project'
-                  ,'I'm Just Looking Around'
-                  ,'Omitted: Question Disabled'
-                  ,'Omitted: Project Access Only'
-                  ,'Omitted: Webinar Signup'
-                  ]
-  - name: country
-    description: The country the member resides in.
-  - name: created_date
-    description: '{{ doc("created_date") }}'
-  - name: created_week
-    description: '{{ doc("created_week") }}'
-  - name: gender
-    description: '{{ doc("gender") }}'
-  - name: group_id
-    description: '{{ doc("group_id") }}'
-    tests:
-      - relationships:
-          to: ref('client_groups')
-          field: group_id
-  - name: is_deleted_member
-    description: '{{ doc("is_deleted_member") }}'
-  - name: is_eligibility_verified
-    description: '{{ doc("is_eligibility_verified") }}'
-  - name: is_proxy_account
-    description: '{{ doc("is_proxy_account") }}'
-    tests:
-      - accepted_values:
-          values: [true,false]
-          quote: false
-  - name: member_age_in_years
-    description: The members age in years, derived from their provided birthdate.
-  - name: member_id
-    description: Unique identifier for a Wellthy member account.
-    tests:
-      - not_null
-      - unique
-  - name: most_recent_modified_at
-    description: '{{ doc("modified_at") }}'
-  - name: most_recent_modified_date
-    description: '{{ doc("modified_date") }}'
-  - name: preferred_contact_method
-    description: '{{ doc("preferred_contact_method") }}'
-    tests:
-      - accepted_values:
-          values: ['Email','Phone','Secondary Email']
-          where: 'profile_deleted_at is null'
-      - not_null:
-          config:
-            where: 'profile_deleted_at is null'
-  - name: profile_deleted_at
-    description: '{{ doc("deleted_at") }}'
-  - name: profile_deleted_date
-    description: '{{ doc("deleted_date") }}'
-  - name: referral_source
-    description: How did the member first hear about Wellthy?
-  - name: member_email
-    description: The email address entered upon creating a Wellthy account.
-  - name: member_email_domain
-    description: The domain of the email entered upon creating a Wellthy account. 
-  - name: user_type
-    description:
-  - name: synced_at
-    description: A timestamp for when the records was synced via Fivetran.
-
-  - name: events
-    description: A table of all Snowplow events.
-    columns:
+          - unique
+      - name: member_name
+        description: A member's full name.
+      - name: member_email
+        description: The email address the member entered upon creating a Wellthy account.
+      - name: member_email_domain
+        description: The domain of the email entered upon creating a Wellthy account.
+      - name: member_age_in_years
+        description: The members age in years, derived from their provided birthdate.
+      - name: signup_date
+        description: The date when a member created a Wellthy account.
+      - name: most_recent_modified_date
+        description: The date when a member profile was most recently modified.
+      - name: caregiving_goal
+        description: The answer an onboarding member gives when prompted with, "What is your caregiving goal?"
+        tests:
+          - accepted_values:
+              values: ['Create a Care Plan'
+                      ,'Create a Community Account'
+                      ,'Create a Care Project'
+                      ,'I'm Just Looking Around'
+                      ]
+      - name: member_country
+        description: The country the member resides in.
+      - name: client_group_id
+        description: The client group a member belongs to. All members belong to a group, which roll up into a parent client.
+        tests:
+          - relationships:
+              to: ref('client_groups')
+              field: group_id
+      - name: is_deleted_member
+        description: A boolean indicating whether a member's profile has been deleted.
+      - name: is_eligibility_verified
+        description: A boolean indicating whether a member has verified their sponsorship through their employer.
+      - name: referral_source
+        description: How did the member first hear about Wellthy?
+      - name: synced_at
+        description: A timestamp for when the records was synced via Fivetran.
