@@ -1,5 +1,4 @@
-SELECT -- 
-       events.event_id
+SELECT events.event_id
 	, events.event_name
 	, events.event_version
 
@@ -46,4 +45,4 @@ SELECT --
 	, events.derived_tstamp
 
 FROM {{ ref('events') }}
-JOIN {{ ref('members') }} members.member_id = events.user_id
+JOIN {{ ref('members') }} ON members.member_id = events.user_id
