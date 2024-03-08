@@ -1,12 +1,24 @@
 models:
   - name: events
-    description: A base model for initial transformations on the source events table. This model is updated incrementally.
+    description: A base model for initial transformations on the source events table.
     columns: 
       - name: event_id
         description: Primary key for each logged event.
         tests:
           - not_null
           - unique
+      - name: event_name
+        description: The name of the type of event logged.
+      - name: funnel_name
+        description: The name of the type of funnel defined in the custom `funnel_events` schema.
+      - name: funnel_step_name
+        description: The step of a funnel the event was logged at.
+      - name: user_id
+        description: The ID of the user, attached via the user entity.
+      - name: user_role
+        description: The type of profile a user has, defined in the user entity schema.
+      - name: user_is_eligibility_verifield
+        description: A boolean indicating whether the attached user has verified their eligibliity with Wellthy.
 
   - name: clients
     description: A base model performing initial transformations on the source clients table.
@@ -18,10 +30,6 @@ models:
           - unique
       - name: name
         description: The name of the client.
-      - name: contract_type
-        description: The type of contract the client has with Wellthy.
-      - name: client_manager_id
-        description: The ID of the Client Success Manager who oversees the client.
       - name: client_launch_date
         description: The date for when a client officially launched with Wellthy.
       - name: days_since_launch
@@ -49,36 +57,21 @@ models:
         description: A member's full name.
       - name: member_email
         description: The email address the member entered upon creating a Wellthy account.
-      - name: member_email_domain
-        description: The domain of the email entered upon creating a Wellthy account.
       - name: member_age_in_years
         description: The members age in years, derived from their provided birthdate.
-      - name: signup_date
-        description: The date when a member created a Wellthy account.
-      - name: most_recent_modified_date
-        description: The date when a member profile was most recently modified.
-      - name: caregiving_goal
-        description: The answer an onboarding member gives when prompted with, "What is your caregiving goal?"
-        tests:
-          - accepted_values:
-              values: ['Create a Care Plan'
-                      ,'Create a Community Account'
-                      ,'Create a Care Project'
-                      ,'I'm Just Looking Around'
-                      ]
-      - name: member_country
-        description: The country the member resides in.
-      - name: client_group_id
-        description: The client group a member belongs to. All members belong to a group, which roll up into a parent client.
+      - name: client_id
+        description: The client a member belongs to.
         tests:
           - relationships:
-              to: ref('client_groups')
-              field: group_id
+              to: ref('clients')
+              field: client_id
+      - name: account_creation_date
+        description: The date when a member created a Wellthy account.
+      - name: member_country
+        description: The country the member resides in.
       - name: is_deleted_member
         description: A boolean indicating whether a member's profile has been deleted.
       - name: is_eligibility_verified
         description: A boolean indicating whether a member has verified their sponsorship through their employer.
       - name: referral_source
         description: How did the member first hear about Wellthy?
-      - name: synced_at
-        description: A timestamp for when the records was synced via Fivetran.

@@ -23,7 +23,7 @@
       "user_id": {
         "type": "string",
         "maxLength": 255,
-        "description": "App specific identifier of the User."
+        "description": "Unique identifier of the user account."
       }
     },
     "additionalProperties": false,

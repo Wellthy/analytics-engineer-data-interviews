@@ -14,23 +14,11 @@
         "enum": [
           "INPUT_FULL_NAME",
           "VERIFY_ELIGIBILITY",
-          "REFERRAL_SOURCE",
           "CREATE_ACCOUNT",
           "CREATE_PROJECT",
           "CONFIRM_COUNTRY",
           "CAREGIVING_GOAL"
         ]
-      },
-      "step_action": {
-        "type": [
-          "string"
-        ],
-        "enum": [
-          "SKIP",
-          "SUBMIT",
-          "EXPAND"
-        ],
-        "description": "The base funnel step action"
       },
       "failure_reason": {
         "type": [
@@ -38,19 +26,18 @@
           "string"
         ],
         "maxLength": 1024,
-        "description": "The base funnel step failure reason"
+        "description": "The funnel step failure reason"
       }
     },
     "additionalProperties": false,
     "type": "object",
     "required": [
       "funnel_name",
-      "step_name",
-      "step_action"
+      "step_name"
     ],
     "self": {
       "vendor": "com.wellthy",
-      "name": "base_funnel",
+      "name": "funnel",
       "format": "jsonschema",
       "version": "1-0-4"
     },
