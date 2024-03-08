@@ -19,14 +19,6 @@
           "CONFIRM_COUNTRY",
           "CAREGIVING_GOAL"
         ]
-      },
-      "failure_reason": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "maxLength": 1024,
-        "description": "The funnel step failure reason"
       }
     },
     "additionalProperties": false,

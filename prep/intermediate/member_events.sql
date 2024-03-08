@@ -1,17 +1,16 @@
 SELECT events.event_id
-	, events.event_name
-	, events.event_version
+     , events.event_name
+     , events.event_version
 
      -- Snowplow-generated IDs
-	, events.domain_userid
-	, events.domain_sessionid
+     , events.domain_userid
+     , events.domain_sessionid
 
      -- member dimensions
      , events.user_id
      , member.member_name
      , events.user_role
-     , member.client_id
-	, member.is_eligibility_verified
+     , member.is_eligibility_verified
      , member.account_creation_date
      , members.country
      , events.user_ipaddress
@@ -31,8 +30,8 @@ SELECT events.event_id
 
      -- event dimensions
      , events.funnel_name
-	, events.funnel_step_name
-	, events.domain_userid
+     , events.funnel_step_name
+     , events.domain_userid
 
      -- session info
      , events.geo_country
@@ -52,8 +51,8 @@ SELECT events.event_id
      , events.refr_urlpath
 
      -- timestamps
-	, events.collector_tstamp
-	, events.derived_tstamp
+     , events.collector_tstamp
+     , events.derived_tstamp
 
 FROM {{ ref('events') }}
 JOIN {{ ref('members') }} ON members.member_id = events.user_id

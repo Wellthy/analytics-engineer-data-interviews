@@ -1,7 +1,6 @@
-SELECT -- event details
-        event_id
-	  , event_name
-	  , event_version
+SELECT   event_id
+       , event_name
+	   , event_version
 
 	  -- Snowplow-generated IDs
 	  , domain_userid
