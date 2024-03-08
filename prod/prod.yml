@@ -11,6 +11,10 @@ models:
             - accepted_values:
                 values: [true, false]
                 quote: false
+        - name: days_since_account_creation
+          description: The number of days since a member created their Wellthy account.
+        - name: days_since_launch
+          description: The number of days since a client launched with Wellthy.
         - name: most_recent_step_completed
           description: The most recent (calculated by the derived_tstamp) step a user completed in the Member Intake Funnel.
         - name: most_recent_step_order_completed
