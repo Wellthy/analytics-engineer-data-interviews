@@ -8,39 +8,6 @@ models:
           - not_null
           - unique
 
-  - name: client_groups
-    description: A base model performing initial transformations on the source client_groups table.
-    columns:
-      - name: client_group_id
-        description: Primary key for the client_groups table. Unique to each Wellthy client group.
-        tests:
-          - not_null
-          - unique
-      - name: client_group_name
-        description: The name of the client group.
-        tests:
-          - not_null
-      - name: client_id
-        description: A foreign key linking a client group to its parent client.
-        tests:
-          - not_null
-          - relationships:
-              to: ref('clients')
-              field: client_id
-      - name: group_status
-        description: The current status a client group in their lifecycle with Wellthy.
-        tests:
-          - accepted_values:
-              values: ['Implementation',
-                       'Pre-launch',
-                       'Pilot',
-                       'Sales Trials',
-                       'Active',
-                       'Decommisioning',
-                       'Terminated']
-      - name: is_default_group
-        description: A boolean indicating whether a group is the default group for a client.
-
   - name: clients
     description: A base model performing initial transformations on the source clients table.
     columns:
@@ -69,7 +36,6 @@ models:
         description: The method by which a client's employees will verify their eligibility for Wellthy.
       - name: is_archived
         description: A boolean for clients who have discontinued use of Wellthy.
-
 
   - name: members
     description: A table of all Wellthy platform accounts of type member.

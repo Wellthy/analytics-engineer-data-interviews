@@ -8,8 +8,6 @@
     tables:
       - name: members
         description: A table of all Wellthy platform accounts of type member.
-      - name: client_groups
-        description: A table of Wellthy client groups. Client groups are segments of members underneath a client.
       - name: clients
         description: A table of all Wellthy clients.
 

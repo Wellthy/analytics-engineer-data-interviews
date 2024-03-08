@@ -5,7 +5,7 @@ SELECT user_id AS member_id
      , modified AS most_recent_modified_at
      , DATE(modified) AS most_recent_modified_date
      , DATEDIFF('days', created_date, CURRENT_DATE) AS days_since_signup
-     , group_id AS client_group_id
+     , client_id
      , eligibility_verified AS is_eligibility_verified
      , {{ get_age_in_years('birthdate') }} AS member_age_in_years
      , referral_source
@@ -26,12 +26,6 @@ SELECT user_id AS member_id
             THEN 'Create a Care Project'
             WHEN caregiving_goal = 4
             THEN 'Just Looking Around'
-            WHEN caregiving_goal = 6
-            THEN 'Omitted: Project Access Only'
-            WHEN caregiving_goal = 7
-            THEN 'Omitted: Webinar Signup'
-            WHEN caregiving_goal = 8
-            THEN 'Omitted: Question Disabled'
             WHEN caregiving_goal IS NULL
             THEN NULL
             ELSE 'Undefined'

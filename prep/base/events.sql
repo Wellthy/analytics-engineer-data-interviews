@@ -5,23 +5,21 @@
           )
 }}
 
-SELECT  event_id
+SELECT  -- event details
+        event_id
 	  , event_name
 	  , event_format
 	  , event_version
 	  , event_fingerprint
-	  , user_id 
 	  , user_ipaddress 
-	  , user_fingerprint 
+	  , user_fingerprint
+
+	  -- Snowplow-generated IDs
 	  , domain_userid 
 	  , domain_sessionid
 	  , network_userid 
       , app_id
 	  , platform 
-	  , etl_tstamp
-	  , collector_tstamp
-	  , dvce_created_tstamp
-	  , derived_tstamp
 	  , txn_id 
 	  , name_tracker 
 	  , v_tracker 
@@ -37,7 +35,9 @@ SELECT  event_id
 	  , ip_isp 
 	  , ip_organization 
 	  , ip_domain 
-	  , ip_netspeed 
+	  , ip_netspeed
+
+
 	  , page_url
 	  , page_title
 	  , page_referrer 
@@ -66,13 +66,26 @@ SELECT  event_id
 	  , doc_height
 	  , geo_timezone
 	  , etl_tags
-	  , unstruct_event_com_wellthy_member_intake_funnel
-	  , contexts_com_wellthy_user
+
+      -- flattened JSON fields
+	  , base_funnel_funnel_name
+	  , base_funnel_step_name
+	  , base_funnel_step_action
+	  , user_id 
+	  , user_role
+	  , user_is_eligibility_verifield
+
+	  --timestamps
 	  , dvce_sent_tstamp
 	  , refr_domain_userid
 	  , refr_dvce_tstamp
 	  , true_tstamp
 	  , load_tstamp
+	  , etl_tstamp
+	  , collector_tstamp
+	  , dvce_created_tstamp
+	  , derived_tstamp
+
 FROM {{ source('snowplow', 'atomic_events')}}
 {% if is_incremental() %}
  WHERE derived_tstamp >= (SELECT MAX(derived_tstamp) FROM {{ this }} )

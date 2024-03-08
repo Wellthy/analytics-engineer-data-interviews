@@ -67,13 +67,14 @@ SELECT events.app_id
 	, events.event_fingerprint
 	, events.true_tstamp
 	, events.load_tstamp
-	, events.unstruct_event_com_wellthy_member_intake_funnel
-	, events.contexts_com_wellthy_user
-     , members.client_group_id
-     , members.user_type
+	, events.base_funnel_funnel_name
+	, events.base_funnel_step_name
+	, events.base_funnel_step_action
+	, events.user_id 
+	, events.user_role
+	, events.user_is_eligibility_verifield
      , member.user_name
      , member.signup_date
-     , members.client_group_id
      , members.is_eligibility_verified
      , members.member_age_in_years
      , members.gender_name

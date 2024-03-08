@@ -3,7 +3,7 @@ models:
     description: An intermediate model combining Snowplow events with the member profile that performed the event.
     columns:
       - name: event_id
-        description: Primary key for Wellthy platform profiles.
+        description: Primary key for each logged event.
         tests:
           - not_null
           - unique

@@ -12,14 +12,11 @@
         "type": "string",
         "description": "The name of the step in the funnel.",
         "enum": [
-          "SET_UP_MFA",
           "INPUT_FULL_NAME",
-          "CREATE_CARE_RECIPIENT",
           "VERIFY_ELIGIBILITY",
           "REFERRAL_SOURCE",
           "CREATE_ACCOUNT",
           "CREATE_PROJECT",
-          "CREATE_PASSWORD",
           "CONFIRM_COUNTRY",
           "CAREGIVING_GOAL"
         ]
