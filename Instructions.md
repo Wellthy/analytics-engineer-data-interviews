@@ -7,7 +7,11 @@ This process starts with a caregiver creating an account on the Wellthy platform
 
 Wellthy’s primary source of revenue is through employer benefit programs: companies (our clients) will sign a contract to offer Wellthy as a benefit to their eligible employees. To increase revenue, retention, and expand our client base, our user experience should be as intiutive and empathetic as possible for caregivers and their families. Therefore, it is important that our signup and conversion process is a smooth one, ensuring a caregiver gets the help they need as quickly as possible. 
 
+<<<<<<< HEAD
 To understand how our members interact with the Wellthy platform, the Data Team, in partnership with Product & Engineering, uses Snowplow to capture event data for analysis. Specific knowledge of Snowplow is not required for this challenge, but a general understanding of event schemas and capturing user events is.
+=======
+To understand how our members interact with the Wellthy platform, the Data Team, in partnership with Product & Engineering, use [Snowplow](https://snowplow.io/) to capture event data for analysis. Specific knowledge of Snowplow is not required for this challenge, but a general understanding of event schemas and capturing user events is.
+>>>>>>> ba4fd16 (add snowplow link)
 
 The Data Team also uses dbt to build and maintain our data transformations. dbt is an open-source command line tool that lets data teams quickly and collaboratively deploy analytics code using software engineering best practices. For more information about dbt you can reference the documentation [here](https://docs.getdbt.com/docs/introduction), or test it out by following their [online tutorial](https://courses.getdbt.com/collections). While not required for this interview, an understanding of dbt project structures and best practices is helpful.
 
