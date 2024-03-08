@@ -38,7 +38,7 @@ For this exercise, we define conversion as someone first creating a Wellthy acco
 * What is the average amount of time a user is spending on each page in the Member Intake Funnel?
 
 ## Challenge
-An analytics engineer on the team has begun modeling event data out to allow the analyst to more easily answer these questions. The engineer has submitted a pull request (PR) for you to review. 
+An analytics engineer on the team has begun modeling event data out to allow the analyst to more easily answer these questions and provide metrics on a continuing basis. The engineer has submitted a pull request (PR) for you to review. 
 
 Prior to your technical interview, please review the files in the `base`, `intermediate`, and `prod` subdirectories, as well as the JSON file, and pretend you are giving a real PR review. Make note of any questions you might have about the sample data model; you will have an opportunity to ask them during the interview. 
 
@@ -46,7 +46,7 @@ Prior to your technical interview, please review the files in the `base`, `inter
 During your interview, we will discuss your PR review in a collaborative session. You will not be asked to do any coding yourself, but please be prepared to share your screen and discuss what changes, suggestions, or questions you would include in your review. Please note: you do not need to submit anything ahead of the interview or prepare a presentation of any kind.
 
 ## Event Data (Snowplow)
-The source table for event data is `atomic.events` in a data warehouse, where every tracked event made by a user on the Wellthy application is stored. You can think of "events" as actions a user can perform in an application: a user "viewed" a page, "clicked" a link, "submitted" a form, etc. You can also define custom events in Snowplow unique to your application. In our case, we've included in this repo the event schema for a custom event called "Member Intake Funnel". 
+The source table for event data is `atomic.events` in a data warehouse, where every tracked event made by a user on the Wellthy application is stored. Each row is an event. You can think of "events" as actions a user can perform in an application: a user "viewed" a page, "clicked" a link, "submitted" a form, etc. You can also define custom events in Snowplow unique to your application. In our case, we've included in this repo the event schema for a custom event called "Member Intake Funnel". 
 
 Note: If you are familiar with Snowplow data, you will notice that not all columns typically provided in `atomic.events` are in the `SELECT` statement that creates the `base` model. They have been excluded for simplicity's sake and are not relevant to the challenge.
 
@@ -65,3 +65,4 @@ Since this is an incomplete directory without access to the source data, you are
 * `dbt run` results in a successful build of all models.
 * `dbt test` results in a successful test of all models.
 * All events are firing correctly in Snowplow
+* Any nested JSON arrays have been flattened. 
