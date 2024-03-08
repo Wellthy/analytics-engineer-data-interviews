@@ -17,7 +17,9 @@ SELECT  -- event details
 	  -- Snowplow-generated IDs
 	  , domain_userid 
 	  , domain_sessionid
-	  , network_userid 
+	  , network_userid
+
+      -- session info
       , app_id
 	  , platform 
 	  , txn_id 
@@ -36,8 +38,13 @@ SELECT  -- event details
 	  , ip_organization 
 	  , ip_domain 
 	  , ip_netspeed
+	  , useragent
+	  , dvce_type
+	  , dvce_ismobile
+	  , dvce_screenwidth
+	  , dvce_screenheight
 
-
+	  -- page details
 	  , page_url
 	  , page_title
 	  , page_referrer 
@@ -56,11 +63,6 @@ SELECT  -- event details
 	  , refr_mediu
 	  , refr_sourc
 	  , refr_term
-	  , useragent
-	  , dvce_type
-	  , dvce_ismobile
-	  , dvce_screenwidth
-	  , dvce_screenheight
 	  , doc_charset
 	  , doc_width
 	  , doc_height

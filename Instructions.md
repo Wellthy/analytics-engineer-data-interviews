@@ -5,13 +5,9 @@ At Wellthy, we support families in caring for their loved ones, whether it's for
 
 This process starts with a caregiver creating an account on the Wellthy platform. From there they can create a Care Project and be assigned a Care Coordinator who will assit them throughout their care journey. If you are interested in learning more about Wellthy’s services, you can read more at [here](https://wellthy.com/).
 
-Wellthy’s primary source of revenue is through employer benefit programs: companies (our clients) will sign a contract to offer Wellthy as a benefit to their eligible employees. To increase revenue, retention, and expand our client base, our user experience should be as intiutive and empathetic as possible for caregivers and their families. Therefore, it is important that our signup and conversion process is a smooth one, ensuring a caregiver gets the help they need as quickly as possible. 
+Wellthy’s primary source of revenue is through employer benefit programs: companies (our clients) will sign a contract to offer Wellthy as a benefit to their eligible employees. To increase revenue, retention, and expand our client base, our user experience should be as intuitive and empathetic as possible for caregivers and their families. Therefore, it is important that our signup and conversion process is a smooth one, ensuring a caregiver gets the help they need as quickly as possible. 
 
-<<<<<<< HEAD
-To understand how our members interact with the Wellthy platform, the Data Team, in partnership with Product & Engineering, uses Snowplow to capture event data for analysis. Specific knowledge of Snowplow is not required for this challenge, but a general understanding of event schemas and capturing user events is.
-=======
-To understand how our members interact with the Wellthy platform, the Data Team, in partnership with Product & Engineering, use [Snowplow](https://snowplow.io/) to capture event data for analysis. Specific knowledge of Snowplow is not required for this challenge, but a general understanding of event schemas and capturing user events is.
->>>>>>> ba4fd16 (add snowplow link)
+To understand how our members interact with the Wellthy platform, the Data Team, in partnership with Product & Engineering, uses [Snowplow](https://snowplow.io/) to capture event data for analysis. Specific knowledge of Snowplow is not required for this challenge, but a general understanding of event schemas and capturing user events is.
 
 The Data Team also uses dbt to build and maintain our data transformations. dbt is an open-source command line tool that lets data teams quickly and collaboratively deploy analytics code using software engineering best practices. For more information about dbt you can reference the documentation [here](https://docs.getdbt.com/docs/introduction), or test it out by following their [online tutorial](https://courses.getdbt.com/collections). While not required for this interview, an understanding of dbt project structures and best practices is helpful.
 
@@ -58,7 +54,7 @@ Note: If you are familiar with Snowplow data, you will notice that not all colum
 Our dbt structure is separated across multiple databases and schemas in Snowflake, and transformations are performed in different "layers" to reduce the repetition of logic across multiple models:
 * The `prep` database contains all of the early transformations that are not directly accessed by BI Tools or external processes.
     * The `base` schema contains a 1-1 relationship with the source tables and includes the individual table transformations and column aliasing. Every source table should have a corresponding `base` model.
-    * The `intermediate` schema contains early combinations of records that are used as stepping stones to produce additional downstream transformations. One example of this could be *****. This sepration will allow for leveraging the same models downstream without repeating the same joins multiple times.
+    * The `intermediate` schema contains early combinations of records that are used as stepping stones to produce additional downstream transformations. This separation will allow for leveraging the same models downstream without repeating the same code multiple times.
 * The `prod` database contains the "final" transformations to produce the models that are accessed directly by BI Tools and external processes.
 
 ## Lineage Graph
