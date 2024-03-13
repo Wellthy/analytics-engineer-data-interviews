@@ -1,7 +1,6 @@
 SELECT id AS client_id
      , name
      , CAST(created AS DATE) AS client_launch_date
-     , DATEDIFF('days', client_launch_date, CURRENT_DATE) AS days_since_launch
      , client_size
      , client_industry
      , client_landing_page_url

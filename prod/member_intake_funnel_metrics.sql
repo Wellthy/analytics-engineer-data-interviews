@@ -31,6 +31,7 @@ WITH funnel_events AS (
 SELECT funnel_events.member_id,
        funnel_events.member_email,
        funnel_events.is_eligibility_verified,
+       funnel_events.days_since_account_creation,
        funnel_events.client_id,
        funnel_events.client_name,
        funnel_events.days_since_launch
