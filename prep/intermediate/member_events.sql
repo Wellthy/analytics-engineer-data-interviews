@@ -13,10 +13,20 @@ SELECT events.event_id
      , member.is_eligibility_verified
      , member.account_creation_date
      , members.country
-     , events.user_ipaddress 
+     , events.user_ipaddress
      , members.member_email
      , members.is_deleted_member
      , members.profile_deleted_date
+
+     -- client dimensions
+     , client.name
+     , client.client_launch_date
+     , client.days_since_launch
+     , client.client_size
+     , client.client_industry
+     , client.eligibility_verification_method
+     , client.is_archived
+     , client.archived_date
 
      -- event dimensions
      , events.funnel_name
@@ -46,3 +56,4 @@ SELECT events.event_id
 
 FROM {{ ref('events') }}
 JOIN {{ ref('members') }} ON members.member_id = events.user_id
+LEFT JOIN {{ ref('clients') }} ON clients.client_id = members.client_id
