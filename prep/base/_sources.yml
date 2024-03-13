@@ -1,0 +1,24 @@
+- name: wellthy
+    database: source_database
+    schema: source_schema
+    description: This is data from the Wellthy production database, extracted via Fivetran.
+    freshness: # default freshness
+      warn_after: {count: 1, period: hour}
+    loaded_at_field: _fivetran_synced
+    tables:
+      - name: members
+        description: A table of all Wellthy platform accounts of type member.
+      - name: clients
+        description: A table of all Wellthy clients.
+
+- name: snowplow
+    database: source_database
+    schema: source_schema
+    description: This is event data from the Wellthy platform, as tracked and captured by Snowplow. Each record is a unique event performed by a user.
+    freshness: # default freshness
+      warn_after: {count: 1, period: hour}
+    loaded_at_field: col_etl_tstamp
+    tables:
+      - name: events
+        description: A table of all tracking events logged by Snowplow.
+       

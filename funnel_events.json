@@ -1,0 +1,37 @@
+{
+    "description": "Schema for a funnel event",
+    "properties": {
+      "funnel_name": {
+        "type": "string",
+        "description": "The name of the funnel",
+        "enum": [
+          "MEMBER_INTAKE"
+        ]
+      },
+      "step_name": {
+        "type": "string",
+        "description": "The name of the step in the funnel.",
+        "enum": [
+          "INPUT_FULL_NAME",
+          "VERIFY_ELIGIBILITY",
+          "CREATE_ACCOUNT",
+          "CREATE_PROJECT",
+          "CONFIRM_COUNTRY",
+          "CAREGIVING_GOAL"
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "funnel_name",
+      "step_name"
+    ],
+    "self": {
+      "vendor": "com.wellthy",
+      "name": "funnel",
+      "format": "jsonschema",
+      "version": "1-0-4"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }

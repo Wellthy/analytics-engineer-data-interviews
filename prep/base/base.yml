@@ -1,0 +1,77 @@
+models:
+  - name: events
+    description: A base model for initial transformations on the source events table.
+    columns: 
+      - name: event_id
+        description: Primary key for each logged event.
+        tests:
+          - not_null
+          - unique
+      - name: event_name
+        description: The name of the type of event logged.
+      - name: funnel_name
+        description: The name of the type of funnel defined in the custom `funnel_events` schema.
+      - name: funnel_step_name
+        description: The step of a funnel the event was logged at.
+      - name: user_id
+        description: The ID of the user, attached via the user entity.
+      - name: user_role
+        description: The type of profile a user has, defined in the user entity schema.
+      - name: user_is_eligibility_verifield
+        description: A boolean indicating whether the attached user has verified their eligibliity with Wellthy.
+
+  - name: clients
+    description: A base model performing initial transformations on the source clients table.
+    columns:
+      - name: client_id
+        description: Primary key for the clients table. Unqiue to each Wellthy client.
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: The name of the client.
+      - name: client_launch_date
+        description: The date for when a client officially launched with Wellthy.
+      - name: days_since_launch
+        description: The number of days since the launch.
+      - name: client_size
+        description: The number of employees a client has.
+      - name: client_industry
+        description: The industry a client is a part of, e.g., Industrial, Hospitality, Technology.
+      - name: client_landing_page_url
+        description: The URL of webpage that a clients' employees will use to nagivate and log into Wellthy.
+      - name: eligibility_verification_method
+        description: The method by which a client's employees will verify their eligibility for Wellthy.
+      - name: is_archived
+        description: A boolean for clients who have discontinued use of Wellthy.
+
+  - name: members
+    description: A table of all Wellthy platform accounts of type member.
+    columns:
+      - name: member_id
+        description: Unique identifier for a Wellthy member profile.
+        tests:
+          - not_null
+          - unique
+      - name: member_name
+        description: A member's full name.
+      - name: member_email
+        description: The email address the member entered upon creating a Wellthy account.
+      - name: member_age_in_years
+        description: The members age in years, derived from their provided birthdate.
+      - name: client_id
+        description: The client a member belongs to.
+        tests:
+          - relationships:
+              to: ref('clients')
+              field: client_id
+      - name: account_creation_date
+        description: The date when a member created a Wellthy account.
+      - name: member_country
+        description: The country the member resides in.
+      - name: is_deleted_member
+        description: A boolean indicating whether a member's profile has been deleted.
+      - name: is_eligibility_verified
+        description: A boolean indicating whether a member has verified their sponsorship through their employer.
+      - name: referral_source
+        description: How did the member first hear about Wellthy?

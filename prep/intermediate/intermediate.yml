@@ -1,0 +1,12 @@
+models:
+  - name: member_events
+    description: An intermediate model combining Snowplow events with member profiles. Each record is a unique event performed by a member.
+    columns:
+      - name: event_id
+        description: Primary key for each logged event.
+        tests:
+          - not_null
+      - name: member_id
+        description: Unique identifier for Wellthy member profiles.
+        tests:
+          - not_null
