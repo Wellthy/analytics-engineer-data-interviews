@@ -8,10 +8,10 @@ SELECT events.event_id
 
      -- member dimensions
      , events.user_id
-     , member.member_name
+     , members.member_name
      , events.user_role
-     , member.is_eligibility_verified
-     , member.account_creation_date
+     , members.is_eligibility_verified
+     , members.account_creation_date
      , members.country
      , events.user_ipaddress 
      , members.member_email
