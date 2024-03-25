@@ -1,12 +1,13 @@
-SELECT   event_id
-       , event_name
-	   , event_version
+SELECT  event_id
+	  , event_name
+	  , event_version
 
 	  -- Snowplow-generated IDs
 	  , domain_userid
 	  , domain_sessionid
 
-      -- session info
+	  -- session info
+	  , user_ipaddress 
 	  , geo_country
 	  , geo_city
 	  , geo_zipcode
@@ -23,7 +24,7 @@ SELECT   event_id
 	  , page_urlpath
 	  , refr_urlpath
 
-      -- flattened JSON fields
+	  -- flattened JSON fields
 	  , funnel_funnel_name AS funnel_name
 	  , funnel_step_name
 	  , user_id
@@ -34,5 +35,5 @@ SELECT   event_id
 	  , collector_tstamp
 	  , derived_tstamp
 
-FROM {{ source('snowplow', 'atomic_events') }}
+FROM {{ source('snowplow', 'events') }}
 QUALIFY ROW() OVER (PARTITION BY event_id ORDER BY collector_tstamp ASC) = 1

@@ -14,5 +14,5 @@ SELECT id AS client_id
             ELSE NULL
        END AS archived_date
      , _fivetran_synced AS synced_at
-  FROM {{ source('wellthy', 'partnerships_client') }}
+  FROM {{ source('wellthy', 'clients') }}
  WHERE _fivetran_deleted = FALSE

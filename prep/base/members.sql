@@ -14,4 +14,4 @@ SELECT user_id AS member_id
             THEN _fivetran_synced
             ELSE NULL
         END AS profile_deleted_at
-FROM {{ source('wellthy', 'profiles_member') }}
+FROM {{ source('wellthy', 'members') }}
