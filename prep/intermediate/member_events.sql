@@ -19,14 +19,15 @@ SELECT events.event_id
      , members.profile_deleted_date
 
      -- client dimensions
-     , client.name
-     , client.client_launch_date
-     , client.days_since_launch
-     , client.client_size
-     , client.client_industry
-     , client.eligibility_verification_method
-     , client.is_archived
-     , client.archived_date
+     , clients.client_id
+     , clients.name
+     , clients.client_launch_date
+     , clients.days_since_launch
+     , clients.client_size
+     , clients.client_industry
+     , clients.eligibility_verification_method
+     , clients.is_archived
+     , clients.archived_date
 
      -- event dimensions
      , events.funnel_name
@@ -54,6 +55,6 @@ SELECT events.event_id
      , events.collector_tstamp
      , events.derived_tstamp
 
-FROM {{ ref('events') }}
-JOIN {{ ref('members') }} ON members.member_id = events.user_id
-LEFT JOIN {{ ref('clients') }} ON clients.client_id = members.client_id
+FROM {{ ref('events') }} AS events
+JOIN {{ ref('members') }} AS members ON members.member_id = events.user_id
+LEFT JOIN {{ ref('clients') }} AS clients ON clients.client_id = members.client_id
