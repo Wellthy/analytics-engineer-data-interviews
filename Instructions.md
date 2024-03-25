@@ -3,7 +3,7 @@
 ## Background
 At Wellthy, we support families in caring for their loved ones, whether it's for their spouse, parents, children, or a dear friend. We do this by seamlessly integrating technology and personalized care support to help caregivers tackle the logistical and administrative tasks of caring for the ones they love.
 
-This process starts with a caregiver creating an account on the Wellthy platform. From there they can create a Care Project and be assigned a Care Coordinator who will assit them throughout their care journey. If you are interested in learning more about Wellthy’s services, you can read more [here](https://wellthy.com/).
+This process starts with a caregiver creating an account on the Wellthy platform. From there they can create a Care Project and be assigned a Care Coordinator who will assist them throughout their care journey. If you are interested in learning more about Wellthy’s services, you can read more [here](https://wellthy.com/).
 
 Wellthy’s primary source of revenue is through employer benefit programs: companies (our clients) will sign a contract to offer Wellthy as a benefit to their eligible employees. To increase revenue, retention, and expand our client base, our user experience should be as intuitive and empathetic as possible for caregivers and their families. Therefore, it is important that our signup and conversion process is a smooth one, ensuring a caregiver gets the help they need as quickly as possible. 
 
