@@ -24,7 +24,7 @@ WITH funnel_events AS (
  max_step_completed AS (
   SELECT user_id,
          max(step_order) as max_step_completed
-  from calculate_steps
+  from funnel_events
   GROUP BY ALL
 )
 
