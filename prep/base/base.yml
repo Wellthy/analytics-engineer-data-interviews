@@ -30,10 +30,10 @@ models:
           - unique
       - name: name
         description: The name of the client.
+      - name: archived_date
+        description: The date on which a client discontinued use of Wellthy.
       - name: client_launch_date
         description: The date for when a client officially launched with Wellthy.
-      - name: days_since_launch
-        description: The number of days since the launch.
       - name: client_size
         description: The number of employees a client has.
       - name: client_industry
@@ -44,6 +44,8 @@ models:
         description: The method by which a client's employees will verify their eligibility for Wellthy.
       - name: is_archived
         description: A boolean for clients who have discontinued use of Wellthy.
+      - name: synced_at
+        description: The timestamp when a record was loaded into the Wellthy data warehouse.
 
   - name: members
     description: A table of all Wellthy platform accounts of type member.
@@ -73,5 +75,5 @@ models:
         description: A boolean indicating whether a member's profile has been deleted.
       - name: is_eligibility_verified
         description: A boolean indicating whether a member has verified their sponsorship through their employer.
-      - name: referral_source
-        description: How did the member first hear about Wellthy?
+      - name: profile_deleted_at
+        description: The timestamp when a member's profile was deleted.

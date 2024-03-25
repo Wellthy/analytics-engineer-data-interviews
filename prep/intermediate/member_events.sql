@@ -12,11 +12,11 @@ SELECT events.event_id
      , events.user_role
      , member.is_eligibility_verified
      , member.account_creation_date
-     , members.country
+     , members.member_country
      , events.user_ipaddress 
      , members.member_email
      , members.is_deleted_member
-     , members.profile_deleted_date
+     , members.profile_deleted_at
 
      -- event dimensions
      , events.funnel_name
@@ -44,5 +44,5 @@ SELECT events.event_id
      , events.collector_tstamp
      , events.derived_tstamp
 
-FROM {{ ref('events') }}
-JOIN {{ ref('members') }} ON members.member_id = events.user_id
+FROM {{ ref('events') }} AS events
+JOIN {{ ref('members') }} AS members ON members.member_id = events.user_id

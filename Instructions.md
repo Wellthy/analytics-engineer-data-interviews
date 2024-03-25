@@ -62,5 +62,6 @@ Our dbt structure is separated across multiple databases and schemas in Snowflak
 Since this is an incomplete directory without access to the source data, you are unable to run the models yourself to verify their accuracy. As such, please assume the following:
 * `dbt run` results in a successful build of all models.
 * `dbt test` results in a successful test of all models.
+* All timestamps are in UTC.
 * All events are firing correctly in Snowplow.
 * Any nested JSON arrays have been flattened. 
