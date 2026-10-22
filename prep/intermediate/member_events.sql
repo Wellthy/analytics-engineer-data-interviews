@@ -10,8 +10,8 @@ SELECT events.event_id
      , events.user_id
      , members.member_name
      , events.user_role
-     , member.is_eligibility_verified
-     , member.account_creation_date
+     , members.is_eligibility_verified
+     , members.account_creation_date
      , members.member_country
      , events.user_ipaddress 
      , members.member_email

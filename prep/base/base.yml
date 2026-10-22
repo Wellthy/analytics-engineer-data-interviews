@@ -17,14 +17,14 @@ models:
         description: The ID of the user, attached via the user entity.
       - name: user_role
         description: The type of profile a user has, defined in the user entity schema.
-      - name: user_is_eligibility_verifield
-        description: A boolean indicating whether the attached user has verified their eligibliity with Wellthy.
+      - name: user_is_eligibility_verified
+        description: A boolean indicating whether the attached user has verified their eligibility with Wellthy.
 
   - name: clients
     description: A base model performing initial transformations on the source clients table.
     columns:
       - name: client_id
-        description: Primary key for the clients table. Unqiue to each Wellthy client.
+        description: Primary key for the clients table. Unique to each Wellthy client.
         tests:
           - not_null
           - unique
@@ -39,7 +39,7 @@ models:
       - name: client_industry
         description: The industry a client is a part of, e.g., Industrial, Hospitality, Technology.
       - name: client_landing_page_url
-        description: The URL of webpage that a clients' employees will use to nagivate and log into Wellthy.
+        description: The URL of webpage that a clients' employees will use to navigate and log into Wellthy.
       - name: eligibility_verification_method
         description: The method by which a client's employees will verify their eligibility for Wellthy.
       - name: is_archived
