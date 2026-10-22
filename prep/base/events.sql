@@ -36,4 +36,4 @@ SELECT  event_id
 	  , derived_tstamp
 
 FROM {{ source('snowplow', 'events') }}
-QUALIFY ROW_NUMBER() OVER (PARTITION BY event_id ORDER BY collector_tstamp ASC) = 1
+QUALIFY ROW() OVER (PARTITION BY event_id ORDER BY collector_tstamp ASC) = 1
