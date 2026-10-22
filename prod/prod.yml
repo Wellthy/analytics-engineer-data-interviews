@@ -1,1 +1,27 @@
 models:
+  - name: member_intake_funnel_metrics
+    description: A production model designed to help answer questions about the member signup and conversion experience. Every row is a unique member_id.
+    columns:
+        - name: member_id
+          description: Unique identifier for a Wellthy member profile.
+        - name: completed_intake_funnel
+          description: A boolean indicating whether a member completed every step in the Member Intake Funnel. This is considered a conversion.
+          tests:
+            - not_null
+            - accepted_values:
+                values: [true, false]
+                quote: false
+        - name: days_since_account_creation
+          description: The number of days since a member created their Wellthy account.
+        - name: days_since_launch
+          description: The number of days since a client launched with Wellthy.
+        - name: most_recent_step_completed
+          description: The most recent (calculated by the derived_tstamp) step a user completed in the Member Intake Funnel.
+        - name: most_recent_step_order_completed
+          description: The farthest step a user completed in the Member Intake Funnel, based on its numeric ordering.
+        - name: most_recent_step_completed_at
+          description: The timestamp for when a user completed the farthest step they reached in the Member Intake Funnel.
+        - name: most_recent_page_url
+          description: The URL of the webpage where a user completed their most recent step.
+        - name: previous_page_url
+          description: The URL of the webpage a user was previously on.

@@ -18,6 +18,16 @@ SELECT events.event_id
      , members.is_deleted_member
      , members.profile_deleted_at
 
+     -- client dimensions
+     , clients.client_id
+     , clients.name
+     , clients.client_launch_date
+     , clients.client_size
+     , clients.client_industry
+     , clients.eligibility_verification_method
+     , clients.is_archived
+     , clients.archived_date
+
      -- event dimensions
      , events.funnel_name
      , events.funnel_step_name
@@ -46,3 +56,4 @@ SELECT events.event_id
 
 FROM {{ ref('events') }} AS events
 JOIN {{ ref('members') }} AS members ON members.member_id = events.user_id
+LEFT JOIN {{ ref('clients') }} AS clients ON clients.client_id = members.client_id
